@@ -1,79 +1,89 @@
-//click the button presented password criteria, ask input parametres and length, generate password and write
+//describe variables
 
-// create function for ask a customer password length, validaite and save.
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
+var userCriteria = [];
+var criteria = ["numbers", "letters", "symbols"];
+var passwordLength = 0;
+var pass = "";
+var numbers = "0123456789";
+var letters = "abcdefghijklmnopqrstuvwxyz";
+var symbols = "@#$%^&*()!";
+var upperCases = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var userPass = "";
+var userChar = "";
+var password = "";
 
-function generateLength() {
-  var passLenght = prompt("choose password lengh");
-  if (passLenght < 8 || passLenght > 128) {
-    alert("your password lengh is not between 8 and 128");
-  } else return passLenght;
-}
+// create function to show and choose password criteria========================
+function generateCriteria() {
+  while (userCriteria.length < 1) {
+    var i = 0;
+    while (i < criteria.length) {
+      var userChoise = confirm("whould you like" + " " + criteria[i]);
 
-// generate input parametre
-// THEN I am presented with a series of prompts for password criteria
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
-// WHEN prompted for character types to include in the password
-// THEN I choose lowercase, uppercase, numeric, and / or special characters
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-function askInput(number, symbol, upercase) {
-  var askInput = prompt(
-    "please choose the password criteria: easy, middle, strong"
-  );
-  var criteria = "include numbers";
-
-  return passCriteria;
-}
-
-//create function for generate random number and letters
-function generateRendomLetters() {
-  return numbers;
-}
-//create function fot generate random symbols
-function generateRendomSymbols() {
-  r = new Random();
-  return String.valueOf(char(r.nextInt(95) + 32));
-  //return generateRendomSymbols;
-}
-
-//create generate password function with input parametres lenght, password criteria
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-function generatePassword() {
-  if (askInput === "easy") {
-    var letter = generateRendomLetters();
-    var symbol = generateRendomSymbols();
-    var password = letter + symbol;
+      if (userChoise) {
+        userCriteria.push(criteria[i]);
+      }
+      i = i + 1;
+    }
   }
+}
+generateCriteria();
+console.log(userCriteria);
 
-  return password;
+//choose password length========================================== string doesnot allow
+
+while (passwordLength > 128 || passwordLength < 8) {
+  var passwordLength = prompt("please choose the password length");
+
+  if (passwordLength > 128 || passwordLength < 8) {
+    alert(
+      "password length should be at least 8 and no more 128. please try again"
+    );
+  }
 }
 
-// create write the password funtion
+// put password elements and validate ===============
 
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
+function generatepassword() {
+  while (userPass.length < passwordLength) {
+    var userChar = prompt(
+      "choose" + " " + userCriteria + " " + "total" + " " + passwordLength
+    );
+    if (
+      userCriteria.indexOf("numbers") === -1 &&
+      numbers.indexOf(userChar) >= 0 &&
+      userChar.length > 0
+    ) {
+      alert("do not put number!!!");
+    } else if (
+      userCriteria.indexOf("letters") === -1 &&
+      letters.indexOf(userChar) >= 0 &&
+      userChar.length > 0
+    ) {
+      alert("do not put letters!!!");
+    } else if (
+      userCriteria.indexOf("symbols") === -1 &&
+      symbols.indexOf(userChar) >= 0 &&
+      userChar.length > 0
+    ) {
+      alert("do not put symbols!!!");
+    } else if (
+      userChar === "" ||
+      userChar.length > 1
+      //||
+      //upperCases.indexOf(userChar) < 0
+    ) {
+      alert("choosen character doesnot allow empty!");
+    } else userPass = userPass + userChar;
+  }
+  return userPass;
+}
 
-//   passwordText.value = password;
-// }
+// create write password function
+function writePassword() {
+  var password = generatepassword();
+  var passwordText = document.querySelector("#password");
 
-// generate the password follow the input parametrs
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
-document.getElementById("generate").addEventListener("click", function () {
-  var criteria = confirm(
-    "password must includes numbers, letters,special symbols and at least one upercase letter and length must be at least 8 no more 128"
-  );
-  //askInput();
-  generateLength();
-  generatePassword();
-  //writePassword();
-  console.log(generatePassword());
-});
-
-// Assignment Code
-// var generateBtn = document.querySelector("#generate")
+  passwordText.value = password;
+}
+// add event listener to generate button
+generateBtn = document.addEventListener("click", writePassword);
