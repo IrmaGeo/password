@@ -11,6 +11,7 @@ var upperCases = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var userPass = "";
 var userChar = "";
 var password = "";
+var eRror = 1;
 
 // create function to show and choose password criteria========================
 function generateCriteria() {
@@ -31,16 +32,22 @@ console.log(userCriteria);
 
 //choose password length========================================== string doesnot allow
 
-while (passwordLength > 128 || passwordLength < 8) {
+while ((passwordLength > 128 || passwordLength < 8) & (eRror === 1)) {
   var passwordLength = prompt("please choose the password length");
 
+  var eRror = 0;
   if (passwordLength > 128 || passwordLength < 8) {
     alert(
       "password length should be at least 8 and no more 128. please try again"
     );
-  }
+  } else if (passwordLength >= 8 && passwordLength <= 128) {
+    passwordLength = Math.floor(passwordLength);
+  } else alert("please enter valid number and try again");
+  var eRror = 1;
+  var passwordLength = prompt("please choose the password length");
 }
 
+//console.log(passwordLength);
 // put password elements and validate ===============
 
 function generatepassword() {
