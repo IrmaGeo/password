@@ -11,6 +11,10 @@ body,
   margin: 0;
   padding: 0;
 }
+.container {
+  cursor: pointer;
+  user-select: none;
+}
 
 body {
   font-family: sans-serif;

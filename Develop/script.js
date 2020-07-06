@@ -14,67 +14,54 @@ var password = "";
 var eRror = 1;
 var countUpper = 0;
 
-// create function to show and choose password criteria========================
-function generateCriteria() {
-  while (userCriteria.length < 1) {
-    var i = 0;
-    while (i < criteria.length) {
-      var userChoise = confirm("whould you like" + " " + criteria[i]);
+function validateParameters() {}
 
-      if (userChoise) {
-        userCriteria.push(criteria[i]);
-      }
-      i = i + 1;
-    }
-  }
-}
-generateCriteria();
-
-//choose password length========================================== string doesnot allow
-
-while ((passwordLength > 128 || passwordLength < 8) & (eRror === 1)) {
-  var passwordLength = prompt("please choose the password length");
-
-  var eRror = 0;
-  if (passwordLength > 128 || passwordLength < 8) {
-    alert(
-      "password length should be at least 8 and no more 128. please try again"
-    );
-  } else if (passwordLength >= 8 && passwordLength <= 128) {
-    passwordLength = Math.floor(passwordLength);
-  } else alert("please enter valid number and try again");
-  var eRror = 1;
-  var passwordLength = prompt("please choose the password length");
-}
-
-// put password elements and validate ===============
+console.log(validateParameters());
+//  put password elements and validate ===============
 
 function generatepassword() {
-  while (countUpper === 0) {
-    while (userPass.length < passwordLength) {
-      var userChar = prompt(
-        "choose" + " " + userCriteria + " " + "total" + " " + passwordLength
-      );
+  var criteriaNumbers = document.getElementById("Numbers");
+  var criteriaLetters = document.getElementById("Letters");
+  var criteriaSymbols = document.getElementById("Symbols");
+  var x = document.getElementById("length").value;
+  var y = 0;
+  var z = 0;
+
+  if (
+    criteriaNumbers.checked == false &&
+    criteriaLetters.checked == false &&
+    criteriaSymbols.checked == false
+  ) {
+    alert("Please, choose at least one criteria");
+  } else y = 1;
+
+  if (x <= 7 || x >= 129) {
+    alert("Password must be beetwen 8 and 128");
+  } else z = 1;
+
+  while (countUpper === 0 && y === 1 && z === 1) {
+    while (userPass.length < x) {
+      var userChar = prompt("put password");
 
       if (
-        userCriteria.indexOf("numbers") === -1 &&
+        criteriaNumbers.checked == false &&
         numbers.indexOf(userChar) >= 0 &&
         userChar.length > 0
       ) {
         alert("do not put number!!!");
       } else if (
-        userCriteria.indexOf("letters") === -1 &&
+        criteriaLetters.checked == false &&
         letters.indexOf(userChar) >= 0 &&
         userChar.length > 0
       ) {
         alert("do not put letters!!!");
       } else if (
-        userCriteria.indexOf("symbols") === -1 &&
+        criteriaSymbols.checked == false &&
         symbols.indexOf(userChar) >= 0 &&
         userChar.length > 0
       ) {
         alert("do not put symbols!!!");
-      } else if (userChar === "" || userChar.length > 1) {
+      } else if (userChar === "" || userChar.length >= 2) {
         alert(
           "choosen character doesnot allow empty or choose only one character!"
         );
@@ -89,7 +76,6 @@ function generatepassword() {
       userPass = "";
     }
   }
-
   return userPass;
 }
 

@@ -1,0 +1,4 @@
+1. it was a little bit hard to verify password length would not be a string
+2. I loose time check to upper case latter. I think exists function, which would be easier.
+3. I have many variables. I think there is a possibility of an optimized code.
+4. I am not satisfied about algorithm. I think is too hard. if I had known good javas function and syntax, I would choose an easier way.
