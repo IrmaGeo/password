@@ -50,5 +50,8 @@ You are required to submit the following for review:
 
 website link: -- https://irmageo.github.io/password/
 
+06/06/2020
+add checkboxes and change password generate function.
+
 
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
